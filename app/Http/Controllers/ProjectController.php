@@ -30,7 +30,8 @@ class ProjectController extends Controller
         ]);
 
         $project = Project::create($validated);
-        $project = Project::find($project->id);
+        $project->refresh();
+        
         return response()->json($project, 201);
     }
 
