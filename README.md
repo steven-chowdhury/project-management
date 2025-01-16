@@ -24,10 +24,10 @@ docker-compose up
 - Note: Configuration for MySQL is not needed since it's running as an isolated container.
 
 #### 2. Run the Migrations and Seeders
-- Run the migrations and seeders using 
-```bash
-./vendor/bin/sail artisan migrate --seed
-```
+- Run the migrations and seeders using: 
+  ```bash
+  ./vendor/bin/sail artisan migrate --seed
+  ```
 - The container is now running on localhost:8000
 
 ## Endpoints
