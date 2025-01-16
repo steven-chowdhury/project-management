@@ -71,7 +71,7 @@ class TaskController extends Controller
         ]);
 
         $task = Task::findOrFail($id);
-        $task->update($request->all());
+        $task->update($validated);
         return response()->json($task);
     }
 
@@ -82,6 +82,6 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $task->delete();
-        return response()->json($task);
+        return response()->json(['message'=> 'Task deleted successfully']);
     }
 }

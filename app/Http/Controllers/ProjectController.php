@@ -68,6 +68,6 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $project->delete();
-        return response()->json($project);
+        return response()->json(['message'=> 'Project deleted successfully']);
     }
 }

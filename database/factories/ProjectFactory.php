@@ -16,8 +16,10 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        static $count = 1;
+        
         return [
-            'title'=> $this->faker->company().'\'s'.' Project',
+            'title'=> 'Project'.' '.$count++,
             'description'=> $this->faker->sentence(),
             'status'=> $this->faker->randomElement(['open', 'in_progress','completed']),
         ];
