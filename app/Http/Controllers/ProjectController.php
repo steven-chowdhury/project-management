@@ -21,7 +21,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = Project::create($request->all());
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description'=> 'string',
+            'assigned_to'=> 'string',
+            'due_date'=> 'date',
+            'status'=> 'string|in:open,in_progress,completed'
+        ]);
+
+        $project = Project::create($validated);
         $project = Project::find($project->id);
         return response()->json($project, 201);
     }
@@ -40,8 +48,16 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'title' => 'string',
+            'description'=> 'string',
+            'assigned_to'=> 'string',
+            'due_date'=> 'date',
+            'status'=> 'string|in:open,in_progress,completed'
+        ]);
+
         $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $project->update($validated);
         return response()->json($project);
     }
 

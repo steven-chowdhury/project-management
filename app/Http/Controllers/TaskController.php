@@ -34,7 +34,16 @@ class TaskController extends Controller
     public function store(Request $request, string $project_id)
     {
         $project = Project::findOrFail($project_id);
-        $task = $project->tasks()->create($request->all());
+
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description'=> 'string',
+            'assigned_to'=> 'string',
+            'due_date'=> 'date',
+            'status'=> 'string|in:to_do,in_progress,done'
+        ]);
+
+        $task = $project->tasks()->create($validated);
         $task->refresh();
         return response()->json($task);
     }
@@ -53,6 +62,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'title' => 'string',
+            'description'=> 'string',
+            'assigned_to'=> 'string',
+            'due_date'=> 'date',
+            'status'=> 'string|in:to_do,in_progress,done'
+        ]);
+
         $task = Task::findOrFail($id);
         $task->update($request->all());
         return response()->json($task);
