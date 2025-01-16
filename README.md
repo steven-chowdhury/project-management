@@ -29,7 +29,7 @@ docker-compose up
   ./vendor/bin/sail artisan migrate --seed
   ```
 
-The container is now running on http://localhost:8000.
+#### 3. The container is now running on http://localhost:8000.
 
 ## Endpoints
 
