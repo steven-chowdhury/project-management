@@ -23,7 +23,7 @@ class TaskController extends Controller
     public function indexByProjectId(string $project_id)
     {
         $project = Project::findOrFail($project_id);
-        $tasks = Task::where('project_id', $project->id)->get();
+        $tasks = $project->tasks()->get();
 
         return response()->json($tasks);
     }
