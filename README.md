@@ -1,6 +1,6 @@
 ## TTI Challenge - Steven Chowdhury
 - Port: 8000
-- Endpoints available with `/api` prefix (e.g. `http://localhost:8000/api/projects`)
+- Base URL: http://localhost:8000
 
 ## Setup Instructions
 #### 1. Install Docker
@@ -29,3 +29,26 @@ docker-compose up
 ./vendor/bin/sail artisan migrate --seed
 ```
 - The container is now running on localhost:8000
+
+## Endpoints
+
+#### Project:
+```
+GET /api/projects  
+POST /api/projects  
+GET /api/projects/{id}  
+PUT /api/projects/{id}  
+DELETE /api/projects/{id}
+```  
+
+#### Task:
+```
+GET /api/tasks   
+GET /api/projects/{project_id}/tasks 
+POST /api/projects/{project_id}/tasks 
+GET /api/tasks/{id} 
+PUT /api/tasks/{id} 
+DELETE /api/tasks/{id} 
+```
+
+
