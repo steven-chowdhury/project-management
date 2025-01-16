@@ -54,6 +54,4 @@ class ProjectController extends Controller
         $project->delete();
         return response()->json($project);
     }
-
-    
 }

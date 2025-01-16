@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Project;
 
 class TaskController extends Controller
 {
@@ -13,38 +13,58 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return response()->json($tasks);
     }
 
     /**
+     * Display all tasks by project id
+     */
+    public function indexByProjectId(string $project_id)
+    {
+        $project = Project::findOrFail($project_id);
+        $tasks = Task::where('project_id', $project->id)->get();
+
+        return response()->json($tasks);
+    }
+ 
+    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaskRequest $request)
+    public function store(Request $request, string $project_id)
     {
-        //
+        $project = Project::findOrFail($project_id);
+        $task = $project->tasks()->create($request->all());
+        $task->refresh();
+        return response()->json($task);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);               
+        return response()->json($task);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(Request $request, string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->update($request->all());
+        return response()->json($task);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return response()->json($task);
     }
 }

@@ -16,8 +16,15 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        static $count = 1;
+
         return [
-            //
+            'project_id'=> $this->faker->numberBetween(1, 3),
+            'title'=> 'Task'.' '.$count++,
+            'description'=> $this->faker->optional()->sentence(),
+            'assigned_to'=> $this->faker->optional()->name(),
+            'due_date'=> $this->faker->optional()->dateTime(),
+            'status'=> $this->faker->randomElement(['to_do','in_progress','done']),
         ];
     }
 }
