@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Project::factory(3)->create();
+        $this->call(ProjectSeeder::class);
     }
 }
