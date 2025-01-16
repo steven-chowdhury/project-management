@@ -24,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($exception instanceof ValidationException) {
                 return response()->json([
                     'message' => 'Validation error',
-                    'details' => $exception->errors(),
+                    'fields' => $exception->errors(),
                 ], 400);
             }
 
